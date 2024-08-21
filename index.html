@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utah Water Usage Visualization</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script>
+        // https://codepen.io/devdojo/pen/qBrEQqM
+        function togglePageFlip(el) {
+            setAllPagesBack();
+            setClickedPageForward(el);
+            el.classList.toggle('turn');
+        }
+
+        function setAllPagesBack() {
+            var pages = document.getElementsByClassName("page");
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].classList.remove('z-50');
+            }
+        }
+
+        function setClickedPageForward(el) {
+            el.classList.add('z-50');
+        }
+    </script>
+    <style>
+        .perspective {
+            -webkit-perspective: 1800px;
+            perspective: 1800px;
+        }
+
+        .page {
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+        }
+
+        .page.turn {
+            -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+        }
+
+        .front,
+        .back {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .back {
+            -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between">
+            <a href="#" class="text-white text-2xl font-semibold">Utah Water Usage</a>
+            <div>
+                <a href="#about" class="text-white mx-4 hover:underline">About</a>
+                <a href="#plots" class="text-white mx-4 hover:underline">Visualizations</a>
+                <a href="#contact" class="text-white mx-4 hover:underline">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-cover bg-center h-screen"
+        style="background-image: url('https://source.unsplash.com/featured/?utah');">
+        <div class="bg-blue-600 bg-opacity-50 h-full flex items-center justify-center">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-white">Understand Utah's Water Usage</h1>
+                <p class="text-xl text-white mt-4">Explore the data through interactive plots</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-semibold text-center mb-8">About the Project</h2>
+            <p class="text-lg text-center mb-4">This project aims to help Utahns understand water usage in the state and
+                how we can work to build effective water policy together. All calculations and references can be found
+                on the reference page. If you see any errors or discrepencies please reach out at ...</p>
+            <p class="text-lg text-center">Scroll down to interact with our visualizations.
+            </p>
+        </div>
+    </section>
+
+    <!-- What is a unit of water -->
+    <section id="about" class="py-12 bg-white">
+        <div class="perspective text-white bg-black w-screen h-screen flex justify-end">
+
+            <div class="page absolute duration-1000 flex items-end origin-left w-1/2 transition h-screen transform"
+                data-page="4" onclick="togglePageFlip(this)">
+                <!-- Page 9 -->
+                <div
+                    class="front text-xl sm:text-3xl md:text-5xl flex items-center justify-start px-2 sm:px-5 md:px-20 font-bold bg-gray-900 h-screen absolute right-0 w-full h-full">
+                    How many days can you feed a dairy cow?
+                </div>
+                <!-- Page 10 -->
+                <div
+                    class="back text-xl sm:text-3xl md:text-5xl font-bold flex items-center justify-start px-2 sm:px-5 md:px-20 bg-gray-800 h-screen absolute w-full h-full">
+                    83
+                </div>
+            </div>
+
+            <div class="page absolute duration-1000 flex items-end origin-left w-1/2 transition h-screen transform"
+                data-page="4" onclick="togglePageFlip(this)">
+                <!-- Page 9 -->
+                <div
+                    class="front text-xl sm:text-3xl md:text-5xl flex items-center justify-start px-2 sm:px-5 md:px-20 font-bold bg-gray-900 h-screen absolute right-0 w-full h-full">
+                    How many tons of alfalfa can you grow?
+                </div>
+                <!-- Page 10 -->
+                <div
+                    class="back text-xl sm:text-3xl md:text-5xl font-bold flex items-center justify-start px-2 sm:px-5 md:px-20 bg-gray-800 h-screen absolute w-full h-full">
+                    2.5
+                </div>
+            </div>
+
+            <div class="page absolute duration-1000 flex items-end origin-left w-1/2 transition h-screen transform"
+                data-page="4" onclick="togglePageFlip(this)">
+                <!-- Page 9 -->
+                <div
+                    class="front text-xl sm:text-3xl md:text-5xl flex items-center justify-start px-2 sm:px-5 md:px-20 font-bold bg-gray-900 h-screen absolute right-0 w-full h-full">
+                    How many residential pools could you fill?
+                </div>
+                <!-- Page 10 -->
+                <div
+                    class="back text-xl sm:text-3xl md:text-5xl font-bold flex items-center justify-start px-2 sm:px-5 md:px-20 bg-gray-800 h-screen absolute w-full h-full">
+                    16
+                </div>
+            </div>
+
+            <div class="page absolute duration-1000 flex items-end origin-left w-1/2 transition h-screen transform"
+                data-page="4" onclick="togglePageFlip(this)">
+                <!-- Page 7 -->
+                <div
+                    class="front text-xl sm:text-3xl md:text-5xl flex items-center justify-start px-2 sm:px-5 md:px-20 font-bold bg-gray-900 h-screen absolute right-0 w-full h-full">
+                    Assuming you do laundry once a week how many years could you keep your clothes clean?
+                </div>
+                <!-- Page 8 -->
+                <div
+                    class="back text-xl sm:text-3xl md:text-5xl font-bold flex items-center justify-start px-2 sm:px-5 md:px-20 bg-gray-800 h-screen absolute w-full h-full">
+                    272! That's 14,000 Loads of Laundry!
+                </div>
+            </div>
+
+            <div class="page absolute duration-1000 flex items-end origin-left w-1/2 transition h-screen transform"
+                data-page="3" onclick="togglePageFlip(this)">
+                <!-- Page 5 -->
+                <div
+                    class="front text-xl sm:text-3xl md:text-5xl flex items-center justify-start px-2 sm:px-5 md:px-20 font-bold bg-gray-900 h-screen absolute right-0 w-full h-full">
+                    Assuming you use the toillete 5 times a day how many years could you flush to your heart's content?
+                </div>
+                <!-- Page 6 -->
+                <div
+                    class="back text-xl sm:text-3xl md:text-5xl font-bold flex items-center justify-start px-2 sm:px-5 md:px-20 bg-gray-800 h-screen absolute w-full h-full">
+                    111! That's 40,731 Flushes!
+                </div>
+            </div>
+
+            <div class="page absolute duration-1000 flex items-end origin-left w-1/2 transition h-screen transform"
+                data-page="2" onclick="togglePageFlip(this)">
+                <!-- Page 3 -->
+                <div
+                    class="front text-xl sm:text-3xl md:text-5xl flex items-center justify-start px-2 sm:px-5 md:px-20 font-bold bg-gray-900 h-screen absolute right-0 w-full h-full">
+                    Let's play a game. If you took a 10-minute shower every
+                    day, how many years could you shower with an acre foot of water?
+                </div>
+                <!-- Page 4 -->
+                <div
+                    class="back text-xl sm:text-3xl md:text-5xl font-bold flex items-center justify-start px-2 sm:px-5 md:px-20 bg-gray-800 h-screen absolute w-full h-full">
+                    42 Years! That's 15,516 Showers!
+                </div>
+            </div>
+
+            <div class="page absolute duration-1000 flex items-end origin-left w-1/2 transition h-screen transform"
+                data-page="1" onclick="togglePageFlip(this)">
+                <!-- Page 1 -->
+                <div
+                    class="front text-xl sm:text-3xl md:text-5xl flex flex-col items-start justify-center px-2 sm:px-5 md:px-20 font-bold bg-gray-900 h-screen absolute right-0 w-full h-full">
+                    How much Water is an Acre Foot?
+                    <p class="text-sm text-gray-500">Click me to open</p>
+                </div>
+                <!-- Page 2 -->
+                <div
+                    class="back text-xl sm:text-3xl md:text-5xl font-bold flex items-center justify-start px-2 sm:px-5 md:px-20 bg-gray-800 h-screen absolute w-full h-full">
+                    At the level of states water is often measured in Acre Feet. It
+                    represents the amount of water needed
+                    to cover one acre of land (~43.5k ft^2) to a depth of one foot. If you're having trouble thinking
+                    about
+                    how much water that really is
+                    you're not alone. It roughly comes out to 385,000 gallons.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Acre Foot -->
+    <section id="plots" class="py-12 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-semibold text-center mb-8">How does water get used in the State of Utah</h2>
+            <p class="text-lg text-center mb-4">An acre foot is A LOT of water! As a person we can shower or use the
+                bathroom for most of our lives
+                with an acre foot of water. We went through the above information to get a better sense of the data that
+                will be presented below. (You can find the calculations in the reference section.)
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Plot 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Things that are equal to an acre foot of water.</h3>
+                    <div id="acre_feet" class="h-96"></div>
+                </div>
+                <!-- Plot 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Water Used by Type</h3>
+                    <div id="use_plot" class="h-96"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Population and Water -->
+    <section id="plots" class="py-12 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-semibold text-center mb-8">Population and Water Usage</h2>
+            <p class="text-lg text-center mb-4">I often hear that our growing population is putting a strain on our
+                water resources.
+                It's true that more people means more water consumpation but given that human based water consumpation
+                is about 10%
+                of total water used it doesn't have that big of an effect on the total water consumed by the state. Take
+                a look below. We see that the population grew by 82% the total water usage in that time went up and
+                down. Funnily enough the correlation between the water usage and population over that time period is
+                -0.15.[1]
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Plot 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Utah Population (1985-2015)</h3>
+                    <div id="population" class="h-96"></div>
+                </div>
+                <!-- Plot 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Water Used per Year</h3>
+                    <div id="water_use_by_year" class="h-96"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Acre Foot -->
+    <section id="plots" class="py-12 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-semibold text-center mb-8">Agricultural Breakdown</h2>
+            <p class="text-lg text-center mb-4">Wow! Agriculture is the main water user in Utah! We can see from the
+                above plots that about 85% of water is used for agriculture. To better understand our states water usage
+                let's explore how that water is used and what crops we grow! <a
+                    href="https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=UTAH">[3]</a>
+                <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Plot 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-4">Things that use an acre foot of water.</h3>
+                <div id="acre_feet" class="h-96"></div>
+            </div>
+            <!-- Plot 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-4">Water Used by Type</h3>
+                <div id="use_plot" class="h-96"></div>
+            </div>
+        </div> -->
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 p-4 text-center text-white">
+        <p>&copy; 2024 Utah Water Facts. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Plotly Plot 1 Example
+        var trace1 = {
+            x: ['flushes', 'glasses of oat milk', 'showers', 'laundry cycles', 'glasses of milk', 'hamburgers', 't-shirts', 'pools'],
+            y: [203655, 108617, 15516, 14000, 8146, 494, 450, 16],
+            type: 'bar'
+        };
+        var data1 = [trace1];
+        Plotly.newPlot('acre_feet', data1);
+
+        // Plotly Plot 2 Example
+        // https://www.utahfoundation.org/reports/background-water-utah/#:~:text=Of%20the%205.2%20maf%20of,and%20industrial%20(M%26I)%20use
+        var trace2 = {
+            x: ['Agriculture', 'Residential Outdoor', 'Public Non Community', "Residential Indoor", "Commercial", "Institutional", "Industrial"],
+            y: [4.2, 0.367, 0.22, .143, .097, .085, .026],
+            type: 'bar',
+            // text: ["1", "2", "3", "4", "5", "6", "7"],
+            // hoverinfo: "text"
+        };
+        var data2 = [trace2];
+        Plotly.newPlot('use_plot', data2, {
+            yaxis: {
+                title: 'Water Used (in millions of acre feet)'  // Label for the y-axis
+            }
+        });
+
+        // Population and Water
+        var population_trace = {
+            x: ['1985', '1990', '1995', '2000', '2005', '2010', '2015'],
+            y: [1644800.0, 1722850.0, 1951400.0, 2233200.0, 2547389.0, 2763885.0, 2995919.0],
+            type: 'scatter'
+        };
+        Plotly.newPlot('population', [population_trace], {
+            yaxis: {
+                title: 'Population (in millions)',  // Label for the y-axis
+                range: [0, 5000000]
+            }
+        });
+
+        var water_trace = {
+            x: ['1985', '1990', '1995', '2000', '2005', '2010', '2015'],
+            y: [4.161e6, 4.29e6, 4.301e6, 4.786e6, 4.822e6, 4.133e6, 3.883e6],
+            type: 'scatter'
+        };
+
+        Plotly.newPlot('water_use_by_year', [water_trace], {
+            yaxis: {
+                title: 'Water Used (in millions of acre feet)',
+                range: [0, 5000000]
+            }
+        });
+
+        // Agricultural breakdown
+        // var population_trace = {
+        //     x: ['1985', '1990', '1995', '2000', '2005', '2010', '2015'],
+        //     y: [1644800.0, 1722850.0, 1951400.0, 2233200.0, 2547389.0, 2763885.0, 2995919.0],
+        //     type: 'scatter'
+        // };
+        // Plotly.newPlot('population', [population_trace], {
+        //     yaxis: {
+        //         title: 'Population (in millions)',  // Label for the y-axis
+        //         range: [0, 5000000]
+        //     }
+        // });
+
+        // var water_trace = {
+        //     x: ['1985', '1990', '1995', '2000', '2005', '2010', '2015'],
+        //     y: [4.161e6, 4.29e6, 4.301e6, 4.786e6, 4.822e6, 4.133e6, 3.883e6],
+        //     type: 'scatter'
+        // };
+
+        // Plotly.newPlot('water_use_by_year', [water_trace], {
+        //     yaxis: {
+        //         title: 'Water Used (in millions of acre feet)',
+        //         range: [0, 5000000]
+        //     }
+        // });
+    </script>
+</body>
+
+</html>
