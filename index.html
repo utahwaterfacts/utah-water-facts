@@ -7,6 +7,10 @@
     <title>Utah Water Usage Visualization</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+
     <script>
         // https://codepen.io/devdojo/pen/qBrEQqM
         function togglePageFlip(el) {
@@ -88,9 +92,106 @@
             <h2 class="text-3xl font-semibold text-center mb-8">About the Project</h2>
             <p class="text-lg text-center mb-4">This project aims to help Utahns understand water usage in the state and
                 how we can work to build effective water policy together. All calculations and references can be found
-                on the reference page. If you see any errors or discrepencies please reach out at ...</p>
-            <p class="text-lg text-center">Scroll down to interact with our visualizations.
+                on the reference page and links to sources are bracket in each section. If you see any errors or
+                discrepencies please reach out at [name of this site]@gmail.com</p>
             </p>
+    </section>
+    <section id="acrefoot" class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-semibold text-center mb-8">What is an Acre Foot?</h2>
+            <p class="text-lg text-center mb-4"> At the level of states water is often measured in Acre Feet. It
+                represents the amount of water needed
+                to cover one acre of land (~43.5k ft^2) to a depth of one foot. If you're having trouble thinking
+                about
+                how much water that really is
+                you're not alone. It roughly comes out to 385,000 gallons.</p>
+        </div>
+
+        <!-- What is a unit of water -->
+        <div id="controls-carousel" class="relative w-full" data-carousel="static">
+            <!-- Carousel wrapper -->
+            <div class="relative h-56 overflow-hidden rounded-lg md:h-96 flex items-center justify-center">
+                <!-- Item 1 -->
+                <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                    <p
+                        class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                        water
+                        is an Acre Foot?</p>
+                </div>
+                <!-- Item 2 -->
+                <div class="hidden duration-700 ease-in-out flex items-center justify-center"
+                    data-carousel-item="active">
+                    <p
+                        class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                        Let's play a game. If you took a 10-minute shower every day, how many years could you shower
+                        with an
+                        acre foot of water?
+                    </p>
+                </div>
+                <!-- Item 3 -->
+                <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                    <p
+                        class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                        42 Years! That's 15,516 Showers!
+                    </p>
+                </div>
+                <!-- Item 4 -->
+                <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                    <p
+                        class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                        Assuming you use the toillete 5 times a day how many years could you flush to your heart's
+                        content?
+                    </p>
+                </div>
+                <!-- Item 5 -->
+                <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                    <p
+                        class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                        111! That's 203,655 Flushes!
+                    </p>
+                </div>
+                <!-- Item 6 -->
+                <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                    <p
+                        class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                        Assuming you do laundry once a week how many years could you keep your clothes clean?
+                    </p>
+                </div>
+                <!-- Item 7 -->
+                <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                    <p
+                        class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                        272! That's 14,000 Loads of Laundry!
+                    </p>
+                </div>
+            </div>
+            <!-- Slider controls -->
+            <button type="button"
+                class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                data-carousel-prev>
+                <span
+                    class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-black bg-opacity-75 text-white group-hover:bg-opacity-90 focus:ring-4 focus:ring-white">
+                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 1 1 5l4 4" />
+                    </svg>
+                    <span class="sr-only">Previous</span>
+                </span>
+            </button>
+            <button type="button"
+                class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                data-carousel-next>
+                <span
+                    class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-black bg-opacity-75 text-white group-hover:bg-opacity-90 focus:ring-4 focus:ring-white">
+                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 9 4-4-4-4" />
+                    </svg>
+                    <span class="sr-only">Next</span>
+                </span>
+            </button>
         </div>
     </section>
 
@@ -212,7 +313,7 @@
             <p class="text-lg text-center mb-4">An acre foot is A LOT of water! As a person we can shower or use the
                 bathroom for most of our lives
                 with an acre foot of water. We went through the above information to get a better sense of the data that
-                will be presented below. (You can find the calculations in the reference section.)
+                will be presented below. (You can find the calculations in the reference section.) [2]
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Plot 1 -->
@@ -257,26 +358,51 @@
         </div>
     </section>
 
-    <!-- Acre Foot -->
+    <!-- Crops -->
     <section id="plots" class="py-12 bg-gray-100">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-semibold text-center mb-8">Agricultural Breakdown</h2>
             <p class="text-lg text-center mb-4">Wow! Agriculture is the main water user in Utah! We can see from the
                 above plots that about 85% of water is used for agriculture. To better understand our states water usage
                 let's explore how that water is used and what crops we grow! <a
-                    href="https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=UTAH">[3]</a>
-                <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    href="https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=UTAH">[3]</a>[4][5][6][7][8][9][10]
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Plot 1 -->
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-semibold mb-4">Things that use an acre foot of water.</h3>
-                <div id="acre_feet" class="h-96"></div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Crops Grown in Utah</h3>
+                    <div id="crops" class="h-96"></div>
+                </div>
+                <!-- Plot 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Amount of Water to Produce one Ton of Crop</h3>
+                    <div id="water_used_by_crop" class="h-96"></div>
+                </div>
             </div>
-            <!-- Plot 2 -->
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-semibold mb-4">Water Used by Type</h3>
-                <div id="use_plot" class="h-96"></div>
+        </div>
+    </section>
+
+    <!-- Crop GDP -->
+    <section id="plots" class="py-12 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-semibold text-center mb-8">Agricultural Breakdown</h2>
+            <p class="text-lg text-center mb-4">We grow a lot of neat stuff! If we use money as a proxy for value and
+                look at the total impact these crops have on our states economy we see that they are barely a blip. The
+                largest contributor is alfalfa at just .2% of our GDP! But it uses 68% of ALL of our water.
+                We spend the majority of our desert water on a commodity that brings in almost no money for our state
+                and our people.<a
+                    href="https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=UTAH">[3]</a>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Plot 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Percent of Utah's GDP by Crop</h3>
+                    <div id="crop_gdp" class="h-96"></div>
+                </div>
+                <!-- Plot 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Percent of Utah's Water Used to Grow Each Crop</h3>
+                    <div id="water_used_by_crop" class="h-96"></div>
+                </div>
             </div>
-        </div> -->
         </div>
     </section>
 
@@ -339,28 +465,80 @@
         });
 
         // Agricultural breakdown
-        // var population_trace = {
-        //     x: ['1985', '1990', '1995', '2000', '2005', '2010', '2015'],
-        //     y: [1644800.0, 1722850.0, 1951400.0, 2233200.0, 2547389.0, 2763885.0, 2995919.0],
-        //     type: 'scatter'
-        // };
-        // Plotly.newPlot('population', [population_trace], {
-        //     yaxis: {
-        //         title: 'Population (in millions)',  // Label for the y-axis
-        //         range: [0, 5000000]
-        //     }
-        // });
+        var crops_trace = {
+            x: ['alfalfa',
+                'hay other',
+                'corn',
+                'corn silage',
+                'cherries',
+                'wheat',
+                'safflower'],
+            y: [1960000, 527000, 279720, 64400, 32500, 27666, 10890],
+            type: 'bar'
+        };
+        Plotly.newPlot('crops', [crops_trace], {
+            yaxis: {
+                title: 'Tons of Crop',
+            }
+        });
+
+        var water_trace = {
+            x: ['alfalfa',
+                'hay other',
+                'corn',
+                'corn silage',
+                'cherries',
+                'wheat',
+                'safflower'],
+            y: [0.577, 0.902, 0.405, 0.405, 0.526, 0.422, 0.437],
+            type: 'bar'
+        };
+
+        Plotly.newPlot('water_used_by_crop', [water_trace], {
+            yaxis: {
+                title: 'Acre Feet',
+            }
+        });
+
+        // Agricultural GDP Breakdown
+        var crops_trace = {
+            x: ['alfalfa',
+                'hay other',
+                'corn',
+                'corn silage',
+                'cherries',
+                'wheat',
+                'safflower'],
+            y: [0.001985217629345743,
+                0.00042798613012136143,
+                0.00010929682452778538,
+                2.516343188247103e-05,
+                3.6034309699790126e-05,
+                0.00014936581804909208,
+                1.7392097819144083e-05],
+            type: 'bar'
+        };
+        Plotly.newPlot('crop_gdp', [crops_trace], {
+            yaxis: {
+                title: 'Percent of Utah\'s GDP',
+            }
+        });
 
         // var water_trace = {
-        //     x: ['1985', '1990', '1995', '2000', '2005', '2010', '2015'],
-        //     y: [4.161e6, 4.29e6, 4.301e6, 4.786e6, 4.822e6, 4.133e6, 3.883e6],
-        //     type: 'scatter'
+        //     x: ['alfalfa',
+        //         'hay other',
+        //         'corn',
+        //         'corn silage',
+        //         'cherries',
+        //         'wheat',
+        //         'safflower'],
+        //     y: [0.577, 0.902, 0.405, 0.405, 0.526, 0.422, 0.437],
+        //     type: 'bar'
         // };
 
-        // Plotly.newPlot('water_use_by_year', [water_trace], {
+        // Plotly.newPlot('water_used_by_crop', [water_trace], {
         //     yaxis: {
-        //         title: 'Water Used (in millions of acre feet)',
-        //         range: [0, 5000000]
+        //         title: 'Acre Feet',
         //     }
         // });
     </script>
