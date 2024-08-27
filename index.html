@@ -10,67 +10,90 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 
-
-    <script>
-        // https://codepen.io/devdojo/pen/qBrEQqM
-        function togglePageFlip(el) {
-            setAllPagesBack();
-            setClickedPageForward(el);
-            el.classList.toggle('turn');
-        }
-
-        function setAllPagesBack() {
-            var pages = document.getElementsByClassName("page");
-            for (var i = 0; i < pages.length; i++) {
-                pages[i].classList.remove('z-50');
-            }
-        }
-
-        function setClickedPageForward(el) {
-            el.classList.add('z-50');
-        }
-    </script>
     <style>
-        .perspective {
-            -webkit-perspective: 1800px;
-            perspective: 1800px;
+        /* Color Palette */
+        :root {
+            --primary-blue: #1F6FB2;
+            --accent-blue: #4B9CD3;
+            --dark-blue: #1F4A78;
+            --light-grey: #F5F5F5;
+            --dark-grey: #4A4A4A;
+            --white: #FFFFFF;
         }
 
-        .page {
-            -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
-            -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
+        /* Example Custom Styles */
+        body {
+            background-color: var(--light-grey);
+            color: var(--dark-grey);
         }
 
-        .page.turn {
-            -webkit-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
+        nav {
+            background-color: var(--primary-blue);
         }
 
-        .front,
-        .back {
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+        .hero-overlay {
+            background-color: rgba(31, 111, 178, 0.5);
         }
 
-        .back {
-            -webkit-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
+        .bg-dark-blue {
+            background-color: var(--dark-blue);
+        }
+
+        .text-primary-blue {
+            color: var(--primary-blue);
+        }
+
+        .text-accent-blue {
+            color: var(--accent-blue);
+        }
+
+        footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* Buttons, links and other interactive elements */
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-blue);
+        }
+
+        .link {
+            color: var(--accent-blue);
+        }
+
+        .link:hover {
+            color: var(--dark-blue);
+        }
+
+        /* Carousel Buttons */
+        button[data-carousel-prev] span,
+        button[data-carousel-next] span {
+            background-color: rgba(31, 74, 120, 0.75);
+            color: var(--white);
+        }
+
+        button[data-carousel-prev] span:hover,
+        button[data-carousel-next] span:hover {
+            background-color: rgba(31, 74, 120, 0.9);
         }
     </style>
 </head>
 
-<body class="bg-gray-100 text-gray-800">
+<body>
 
     <!-- Navbar -->
-    <nav class="bg-blue-600 p-4">
+    <nav class="p-4">
         <div class="container mx-auto flex justify-between">
-            <a href="#" class="text-white text-2xl font-semibold">Utah Water Usage</a>
+            <a href="#" class="text-white text-2xl font-semibold">Utah Water Facts</a>
             <div>
                 <a href="#about" class="text-white mx-4 hover:underline">About</a>
                 <a href="#plots" class="text-white mx-4 hover:underline">Visualizations</a>
-                <a href="#contact" class="text-white mx-4 hover:underline">Contact</a>
+                <a href="#references" class="text-white mx-4 hover:underline">References</a>
             </div>
         </div>
     </nav>
@@ -78,7 +101,7 @@
     <!-- Hero Section -->
     <section class="bg-cover bg-center h-screen"
         style="background-image: url('https://source.unsplash.com/featured/?utah');">
-        <div class="bg-blue-600 bg-opacity-50 h-full flex items-center justify-center">
+        <div class="hero-overlay h-full flex items-center justify-center">
             <div class="text-center">
                 <h1 class="text-4xl font-bold text-white">Understand Utah's Water Usage</h1>
                 <p class="text-xl text-white mt-4">Explore the data through interactive plots</p>
@@ -92,222 +115,151 @@
             <h2 class="text-3xl font-semibold text-center mb-8">About the Project</h2>
             <p class="text-lg text-center mb-4">This project aims to help Utahns understand water usage in the state and
                 how we can work to build effective water policy together. All calculations and references can be found
-                on the reference page and links to sources are bracket in each section. If you see any errors or
-                discrepencies please reach out at [name of this site]@gmail.com</p>
+                on the reference page and links to sources are bracketed in each section. I have all of my calculations
+                in a spreadsheet <a
+                    href="https://docs.google.com/spreadsheets/d/19k61Kop8Ieqk1NmJEEI18TOXT4Mq0ACOtI9yBE-biys/edit?usp=sharing">here</a>.
+                If you see any errors or
+                discrepencies please reach out at [name of this site]@gmail.com. The nature of this information
+                naturally requires some assumptions. I've done my best to make it clear how I've done my calculations.
+                If you feel any calculation is missleading again please reach out.
             </p>
+            </p>
+        </div>
     </section>
-    <section id="acrefoot" class="py-12 bg-white">
-        <div class="container mx-auto px-6">
+
+    <!-- Carousel Section -->
+    <section id="acrefoot" class="py-12  bg-gray-100">
+        <div class="container mx-auto px-6 bg-light-grey">
             <h2 class="text-3xl font-semibold text-center mb-8">What is an Acre Foot?</h2>
-            <p class="text-lg text-center mb-4"> At the level of states water is often measured in Acre Feet. It
+            <p class="text-lg text-center mb-4">At the level of states water is often measured in Acre Feet. It
                 represents the amount of water needed
                 to cover one acre of land (~43.5k ft^2) to a depth of one foot. If you're having trouble thinking
                 about
                 how much water that really is
-                you're not alone. It roughly comes out to 385,000 gallons.</p>
-        </div>
-
-        <!-- What is a unit of water -->
-        <div id="controls-carousel" class="relative w-full" data-carousel="static">
-            <!-- Carousel wrapper -->
-            <div class="relative h-56 overflow-hidden rounded-lg md:h-96 flex items-center justify-center">
-                <!-- Item 1 -->
-                <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
-                    <p
-                        class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
-                        water
-                        is an Acre Foot?</p>
+                you're not alone. It roughly comes out to 385,000 gallons. Let's play a game. Below you will be
+                presented with common activities and items that use water, your job is to guess how many times you could
+                use or make the item with an acre foot of water.</p>
+            </p>
+            <div id="controls-carousel" class="relative w-full" data-carousel="static">
+                <div class="relative h-56 overflow-hidden rounded-lg md:h-96 flex items-center justify-center">
+                    <!-- Item 1 -->
+                    <div class="hidden duration-700 ease-in-out flex items-center justify-center"
+                        data-carousel-item="active">
+                        <p
+                            class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                            If you took a 10-minute shower every
+                            day, how many years could you shower with an acre foot of water?
+                        </p>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                        <p
+                            class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                            42 Years! That's 15,516 Showers!
+                        </p>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                        <p
+                            class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                            Assuming you use the toillete 5 times a day how many years could you flush to your heart's
+                            content?
+                        </p>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                        <p
+                            class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                            111! That's 203,655 Flushes!
+                        </p>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                        <p
+                            class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                            Assuming you do laundry once a week how many years could you keep your clothes clean?
+                        </p>
+                    </div>
+                    <!-- Item 6-->
+                    <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                        <p
+                            class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                            272! That's 14,000 Loads of Laundry!
+                        </p>
+                    </div>
+                    <!-- Item 7 -->
+                    <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                        <p
+                            class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                            How many residential pools could you fill?
+                        </p>
+                    </div>
+                    <!-- Item 8 -->
+                    <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                        <p
+                            class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                            16
+                        </p>
+                    </div>
+                    <!-- Item 9 -->
+                    <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                        <p
+                            class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                            How many tons of alfalfa can you grow?
+                        </p>
+                    </div>
+                    <!-- Item 10 -->
+                    <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                        <p
+                            class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                            1.875
+                        </p>
+                    </div>
+                    <!-- Item 11 -->
+                    <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                        <p
+                            class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                            How many days can you feed a dairy cow with alfalfa?
+                        </p>
+                    </div>
+                    <!-- Item 12 -->
+                    <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
+                        <p
+                            class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
+                            63
+                        </p>
+                    </div>
                 </div>
-                <!-- Item 2 -->
-                <div class="hidden duration-700 ease-in-out flex items-center justify-center"
-                    data-carousel-item="active">
-                    <p
-                        class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
-                        Let's play a game. If you took a 10-minute shower every day, how many years could you shower
-                        with an
-                        acre foot of water?
-                    </p>
-                </div>
-                <!-- Item 3 -->
-                <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
-                    <p
-                        class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
-                        42 Years! That's 15,516 Showers!
-                    </p>
-                </div>
-                <!-- Item 4 -->
-                <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
-                    <p
-                        class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
-                        Assuming you use the toillete 5 times a day how many years could you flush to your heart's
-                        content?
-                    </p>
-                </div>
-                <!-- Item 5 -->
-                <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
-                    <p
-                        class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
-                        111! That's 203,655 Flushes!
-                    </p>
-                </div>
-                <!-- Item 6 -->
-                <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
-                    <p
-                        class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
-                        Assuming you do laundry once a week how many years could you keep your clothes clean?
-                    </p>
-                </div>
-                <!-- Item 7 -->
-                <div class="hidden duration-700 ease-in-out flex items-center justify-center" data-carousel-item>
-                    <p
-                        class="text-lg md:text-2xl font-semibold text-center text-gray-800 dark:text-gray-200 p-4 max-w-lg mx-auto">
-                        272! That's 14,000 Loads of Laundry!
-                    </p>
-                </div>
-            </div>
-            <!-- Slider controls -->
-            <button type="button"
-                class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                data-carousel-prev>
-                <span
-                    class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-black bg-opacity-75 text-white group-hover:bg-opacity-90 focus:ring-4 focus:ring-white">
-                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5 1 1 5l4 4" />
-                    </svg>
-                    <span class="sr-only">Previous</span>
-                </span>
-            </button>
-            <button type="button"
-                class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                data-carousel-next>
-                <span
-                    class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-black bg-opacity-75 text-white group-hover:bg-opacity-90 focus:ring-4 focus:ring-white">
-                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 9 4-4-4-4" />
-                    </svg>
-                    <span class="sr-only">Next</span>
-                </span>
-            </button>
-        </div>
-    </section>
-
-    <!-- What is a unit of water -->
-    <section id="about" class="py-12 bg-white">
-        <div class="perspective text-white bg-black w-screen h-screen flex justify-end">
-
-            <div class="page absolute duration-1000 flex items-end origin-left w-1/2 transition h-screen transform"
-                data-page="4" onclick="togglePageFlip(this)">
-                <!-- Page 9 -->
-                <div
-                    class="front text-xl sm:text-3xl md:text-5xl flex items-center justify-start px-2 sm:px-5 md:px-20 font-bold bg-gray-900 h-screen absolute right-0 w-full h-full">
-                    How many days can you feed a dairy cow?
-                </div>
-                <!-- Page 10 -->
-                <div
-                    class="back text-xl sm:text-3xl md:text-5xl font-bold flex items-center justify-start px-2 sm:px-5 md:px-20 bg-gray-800 h-screen absolute w-full h-full">
-                    83
-                </div>
-            </div>
-
-            <div class="page absolute duration-1000 flex items-end origin-left w-1/2 transition h-screen transform"
-                data-page="4" onclick="togglePageFlip(this)">
-                <!-- Page 9 -->
-                <div
-                    class="front text-xl sm:text-3xl md:text-5xl flex items-center justify-start px-2 sm:px-5 md:px-20 font-bold bg-gray-900 h-screen absolute right-0 w-full h-full">
-                    How many tons of alfalfa can you grow?
-                </div>
-                <!-- Page 10 -->
-                <div
-                    class="back text-xl sm:text-3xl md:text-5xl font-bold flex items-center justify-start px-2 sm:px-5 md:px-20 bg-gray-800 h-screen absolute w-full h-full">
-                    2.5
-                </div>
-            </div>
-
-            <div class="page absolute duration-1000 flex items-end origin-left w-1/2 transition h-screen transform"
-                data-page="4" onclick="togglePageFlip(this)">
-                <!-- Page 9 -->
-                <div
-                    class="front text-xl sm:text-3xl md:text-5xl flex items-center justify-start px-2 sm:px-5 md:px-20 font-bold bg-gray-900 h-screen absolute right-0 w-full h-full">
-                    How many residential pools could you fill?
-                </div>
-                <!-- Page 10 -->
-                <div
-                    class="back text-xl sm:text-3xl md:text-5xl font-bold flex items-center justify-start px-2 sm:px-5 md:px-20 bg-gray-800 h-screen absolute w-full h-full">
-                    16
-                </div>
-            </div>
-
-            <div class="page absolute duration-1000 flex items-end origin-left w-1/2 transition h-screen transform"
-                data-page="4" onclick="togglePageFlip(this)">
-                <!-- Page 7 -->
-                <div
-                    class="front text-xl sm:text-3xl md:text-5xl flex items-center justify-start px-2 sm:px-5 md:px-20 font-bold bg-gray-900 h-screen absolute right-0 w-full h-full">
-                    Assuming you do laundry once a week how many years could you keep your clothes clean?
-                </div>
-                <!-- Page 8 -->
-                <div
-                    class="back text-xl sm:text-3xl md:text-5xl font-bold flex items-center justify-start px-2 sm:px-5 md:px-20 bg-gray-800 h-screen absolute w-full h-full">
-                    272! That's 14,000 Loads of Laundry!
-                </div>
-            </div>
-
-            <div class="page absolute duration-1000 flex items-end origin-left w-1/2 transition h-screen transform"
-                data-page="3" onclick="togglePageFlip(this)">
-                <!-- Page 5 -->
-                <div
-                    class="front text-xl sm:text-3xl md:text-5xl flex items-center justify-start px-2 sm:px-5 md:px-20 font-bold bg-gray-900 h-screen absolute right-0 w-full h-full">
-                    Assuming you use the toillete 5 times a day how many years could you flush to your heart's content?
-                </div>
-                <!-- Page 6 -->
-                <div
-                    class="back text-xl sm:text-3xl md:text-5xl font-bold flex items-center justify-start px-2 sm:px-5 md:px-20 bg-gray-800 h-screen absolute w-full h-full">
-                    111! That's 40,731 Flushes!
-                </div>
-            </div>
-
-            <div class="page absolute duration-1000 flex items-end origin-left w-1/2 transition h-screen transform"
-                data-page="2" onclick="togglePageFlip(this)">
-                <!-- Page 3 -->
-                <div
-                    class="front text-xl sm:text-3xl md:text-5xl flex items-center justify-start px-2 sm:px-5 md:px-20 font-bold bg-gray-900 h-screen absolute right-0 w-full h-full">
-                    Let's play a game. If you took a 10-minute shower every
-                    day, how many years could you shower with an acre foot of water?
-                </div>
-                <!-- Page 4 -->
-                <div
-                    class="back text-xl sm:text-3xl md:text-5xl font-bold flex items-center justify-start px-2 sm:px-5 md:px-20 bg-gray-800 h-screen absolute w-full h-full">
-                    42 Years! That's 15,516 Showers!
-                </div>
-            </div>
-
-            <div class="page absolute duration-1000 flex items-end origin-left w-1/2 transition h-screen transform"
-                data-page="1" onclick="togglePageFlip(this)">
-                <!-- Page 1 -->
-                <div
-                    class="front text-xl sm:text-3xl md:text-5xl flex flex-col items-start justify-center px-2 sm:px-5 md:px-20 font-bold bg-gray-900 h-screen absolute right-0 w-full h-full">
-                    How much Water is an Acre Foot?
-                    <p class="text-sm text-gray-500">Click me to open</p>
-                </div>
-                <!-- Page 2 -->
-                <div
-                    class="back text-xl sm:text-3xl md:text-5xl font-bold flex items-center justify-start px-2 sm:px-5 md:px-20 bg-gray-800 h-screen absolute w-full h-full">
-                    At the level of states water is often measured in Acre Feet. It
-                    represents the amount of water needed
-                    to cover one acre of land (~43.5k ft^2) to a depth of one foot. If you're having trouble thinking
-                    about
-                    how much water that really is
-                    you're not alone. It roughly comes out to 385,000 gallons.
-                </div>
+                <!-- Slider controls -->
+                <button type="button"
+                    class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                    data-carousel-prev>
+                    <span class="inline-flex items-center justify-center w-12 h-12 rounded-full text-white">
+                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 1 1 5l4 4" />
+                        </svg>
+                        <span class="sr-only">Previous</span>
+                    </span>
+                </button>
+                <button type="button"
+                    class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                    data-carousel-next>
+                    <span class="inline-flex items-center justify-center w-12 h-12 rounded-full text-white">
+                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 9 4-4-4-4" />
+                        </svg>
+                        <span class="sr-only">Next</span>
+                    </span>
+                </button>
             </div>
         </div>
     </section>
-
     <!-- Acre Foot -->
-    <section id="plots" class="py-12 bg-gray-100">
+    <section id="plots" class="py-12 bg-white">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-semibold text-center mb-8">How does water get used in the State of Utah</h2>
             <p class="text-lg text-center mb-4">An acre foot is A LOT of water! As a person we can shower or use the
@@ -359,7 +311,7 @@
     </section>
 
     <!-- Crops -->
-    <section id="plots" class="py-12 bg-gray-100">
+    <section id="plots" class="py-12 bg-white">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-semibold text-center mb-8">Agricultural Breakdown</h2>
             <p class="text-lg text-center mb-4">Wow! Agriculture is the main water user in Utah! We can see from the
@@ -384,13 +336,25 @@
     <!-- Crop GDP -->
     <section id="plots" class="py-12 bg-gray-100">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-semibold text-center mb-8">Agricultural Breakdown</h2>
+            <h2 class="text-3xl font-semibold text-center mb-8">Agriculture's Economic Contribution to Utah</h2>
             <p class="text-lg text-center mb-4">We grow a lot of neat stuff! If we use money as a proxy for value and
                 look at the total impact these crops have on our states economy we see that they are barely a blip. The
-                largest contributor is alfalfa at just .2% of our GDP! But it uses 68% of ALL of our water.
+                largest contributor is alfalfa and hay at just .2% of our GDP! But it uses 53% of ALL of our state's
+                water.
                 We spend the majority of our desert water on a commodity that brings in almost no money for our state
                 and our people.<a
                     href="https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=UTAH">[3]</a>
+            </p>
+            <p class="text-lg text-center mb-4">These economics are interesting. If we look at what normal people pay
+                for water as a resident it's about $2.09 per unit. A unit is 748 gallons of water. If we look at the
+                economics from above we can see that if 100% of the sale price of alfalfa was the water, not accounting
+                for any farmer labor, they would be selling the water for $0.37 per unit. Alfalfa farmers are selling
+                water at a HUGE discount to their clients when compared to the actual cost of the water. If we look at
+                this difference between the price of the water and the sale price as a subsidy then alfalfa farmers in
+                the state of Utah receive a $748,000,000 handout from the government every year! This is a greater
+                handout than they produce with their land! This isn't entirely fair. City water is potable and so we
+                have to be upcharged for water treatment plants and such. But even if it was half as much it would be
+                almost the same amount as the total revenue from alfalfa production.
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Plot 1 -->
                 <div class="bg-white p-6 rounded-lg shadow-lg">
@@ -400,7 +364,29 @@
                 <!-- Plot 2 -->
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <h3 class="text-xl font-semibold mb-4">Percent of Utah's Water Used to Grow Each Crop</h3>
-                    <div id="water_used_by_crop" class="h-96"></div>
+                    <div id="percent_utah_water_by_crop" class="h-96"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- stacked water savings -->
+    <section id="plots" class="py-12 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-semibold text-center mb-8">Where Our Water Goes</h2>
+            <p class="text-lg text-center mb-4">We grow hay to sell it. So where does the hay go? <a
+                    href="https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=UTAH">[3]</a>
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Amount of Hay (NS121490) Exported to Each Country in $</h3>
+                    <div id="export_dollar_choropleth" class="h-96"></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Amount of Hay (NS121490) Exported to Each Country in $</h3>
+                    <div id="export_dollar_bar" class="h-96"></div>
                 </div>
             </div>
         </div>
@@ -447,20 +433,20 @@
         Plotly.newPlot('population', [population_trace], {
             yaxis: {
                 title: 'Population (in millions)',  // Label for the y-axis
-                range: [0, 5000000]
+                range: [0, 5500000]
             }
         });
 
         var water_trace = {
             x: ['1985', '1990', '1995', '2000', '2005', '2010', '2015'],
-            y: [4.161e6, 4.29e6, 4.301e6, 4.786e6, 4.822e6, 4.133e6, 3.883e6],
+            y: [4.661e6, 4.806e6, 4.818e6, 5.361e6, 5.401e6, 4.63e6, 4.349e6],
             type: 'scatter'
         };
 
         Plotly.newPlot('water_use_by_year', [water_trace], {
             yaxis: {
                 title: 'Water Used (in millions of acre feet)',
-                range: [0, 5000000]
+                range: [0, 5500000]
             }
         });
 
@@ -490,7 +476,7 @@
                 'cherries',
                 'wheat',
                 'safflower'],
-            y: [0.577, 0.902, 0.405, 0.405, 0.526, 0.422, 0.437],
+            y: [1.38, 1.38, 0.454, 0.454, 0.589, 0.473, 0.477],
             type: 'bar'
         };
 
@@ -509,13 +495,13 @@
                 'cherries',
                 'wheat',
                 'safflower'],
-            y: [0.001985217629345743,
-                0.00042798613012136143,
-                0.00010929682452778538,
-                2.516343188247103e-05,
-                3.6034309699790126e-05,
-                0.00014936581804909208,
-                1.7392097819144083e-05],
+            y: [0.1596,
+                0.0344,
+                0.002,
+                0.0088,
+                0.0029,
+                0.012,
+                0.0014],
             type: 'bar'
         };
         Plotly.newPlot('crop_gdp', [crops_trace], {
@@ -524,23 +510,198 @@
             }
         });
 
-        // var water_trace = {
-        //     x: ['alfalfa',
-        //         'hay other',
-        //         'corn',
-        //         'corn silage',
-        //         'cherries',
-        //         'wheat',
-        //         'safflower'],
-        //     y: [0.577, 0.902, 0.405, 0.405, 0.526, 0.422, 0.437],
-        //     type: 'bar'
-        // };
+        var water_trace = {
+            x: ['alfalfa',
+                'hay other',
+                'corn',
+                'corn silage',
+                'cherries',
+                'wheat',
+                'safflower'],
+            y: [53.07,
+                14.27,
+                2.49,
+                0.57,
+                0.38,
+                0.26,
+                0.1],
+            type: 'bar'
+        };
 
-        // Plotly.newPlot('water_used_by_crop', [water_trace], {
-        //     yaxis: {
-        //         title: 'Acre Feet',
-        //     }
-        // });
+        Plotly.newPlot('percent_utah_water_by_crop', [water_trace], {
+            yaxis: {
+                title: 'Percent of Utah\'s Water',
+            }
+        });
+
+        // test stacked plot
+        var trace1 = {
+            x: ['Water Savings'],
+            y: [1], // 1% for showers
+            name: 'Showers',
+            type: 'bar'
+        };
+
+        var trace2 = {
+            x: ['Water Savings'],
+            y: [2], // 2% for toilets
+            name: 'Toilets',
+            type: 'bar'
+        };
+
+        var trace3 = {
+            x: ['Water Savings'],
+            y: [30], // 30% for Chinese alfalfa
+            name: 'Chinese Alfalfa',
+            type: 'bar'
+        };
+
+        // Add more traces for other categories as needed
+
+        var data = [trace1, trace2, trace3];
+
+        var layout = {
+            barmode: 'stack',
+            title: 'Potential Water Savings in Utah',
+            xaxis: {
+                title: 'Water Saving Actions'
+            },
+            yaxis: {
+                title: 'Percentage of Total Water Savings (%)'
+            },
+            showlegend: true
+        };
+
+        // Plotly.newPlot('waterSavings', data, layout);
+
+
+        // choropleth
+        var export_countries = ['Australia', 'Bahrain', 'Canada', 'China', 'Hong Kong', 'India', 'Italy', 'Japan', 'Korea, South', 'Kuwait', 'Netherlands', 'Oman', 'Pakistan', 'Philippines', 'Qatar', 'Saudi Arabia', 'Singapore', 'Spain', 'Switzerland', 'Taiwan', 'Thailand', 'Trinidad and Tobago', 'United Arab Emirates', 'United Kingdom', 'Vietnam'];
+        fetch('121490hs_sales_world_wide.json') // Replace with the path to your JSON file
+            .then(response => response.json())
+            .then(frames => {
+                console.log('Loaded frames:', frames);
+
+                // Keep the absolute values for hover text and labels
+                var absoluteZ = frames[0].data[0].z; // Absolute values for display purposes
+                var logZ = frames[0].data[0].z.map(value => value > 0 ? Math.log10(value) : 0); // Logarithmic values for coloring
+
+                var data = [
+                    {
+                        type: 'choropleth',
+                        locationmode: 'country names',
+                        locations: export_countries,
+                        z: logZ, // Logarithmic values for color scale
+                        customdata: absoluteZ,
+                        text: absoluteZ.map((val, idx) => `\$${val.toLocaleString()}`), // Display absolute values in hover text
+                        hoverinfo: 'location+text', // Display country, z, and text in hover
+                        autocolorscale: false,
+                        zmin: 0, // Min value for log scale
+                        zmax: Math.log10(100000000), // Max value for log scale (100M)
+                        colorscale: 'Viridis',
+                        colorbar: {
+                            title: 'Export Value', // Title of the color bar
+                            tickvals: [0, 2, 4, 6, 8], // Custom tick values (logarithmic scale)
+                            ticktext: ['1', '100', '10k', '1M', '100M'], // Corresponding labels for tick values
+                            len: 1.0, // Length of the color bar as a fraction of plot height
+                            thickness: 20, // Thickness of the color bar
+                            tickformat: ',.0f' // Optional formatting of the tick labels
+                        }
+                    }
+                ];
+
+                var layout = {
+                    geo: {
+                        projection: {
+                            type: 'natural earth'
+                        }
+                    },
+                    sliders: [{
+                        active: 0,
+                        steps: frames.map(frame => ({
+                            method: 'animate',
+                            label: frame.name,
+                            args: [
+                                [frame.name],
+                                { mode: 'immediate', transition: { duration: 300 }, frame: { duration: 300, redraw: true } }
+                            ]
+                        })),
+                        x: 0.1,
+                        len: 0.9
+                    }]
+                };
+
+                Plotly.newPlot('export_dollar_choropleth', data, layout).then(function () {
+                    // Apply log transformation to the z values of the frames, but keep absolute values for hover text
+                    frames.forEach(frame => {
+                        frame.data[0].z = frame.data[0].z.map(value => value > 0 ? Math.log10(value) : 0); // Log scale for color
+                        frame.data[0].text = frame.data[0].z.map((val, idx) => val > 0 ? `\$${(10 ** val).toLocaleString()}` : `\$0`); // Absolute values for hover text
+                    });
+
+                    Plotly.addFrames('export_dollar_choropleth', frames);
+                    console.log('Frames successfully added with log color scale but absolute values for display');
+                });
+            })
+            .catch(error => console.error('Error loading frames:', error));
+
+        // Create a BarPlot to show the same information
+        fetch('121490hs_sales_world_wide.json') // Replace with the path to your JSON file
+            .then(response => response.json())
+            .then(frames => {
+                console.log('Loaded frames:', frames);
+                // Define the initial bar plot data (first frame)
+                var bar_data = [
+                    {
+                        type: 'bar',
+                        x: export_countries,
+                        y: frames[0].data[0].z, // Initial y values from the first frame (absolute values)
+                        hoverinfo: 'x+y+text', // Display country, value, and text in hover
+                        marker: { color: 'blue' }
+                    }
+                ];
+
+                // Define layout with the slider
+                var bar_layout = {
+                    xaxis: { title: 'Country' },
+                    yaxis: { title: 'Export Value ($)' },
+                    sliders: [{
+                        active: 0,
+                        steps: frames.map(frame => ({
+                            method: 'animate',
+                            label: frame.name,
+                            args: [
+                                [frame.name], // Frame name to animate to
+                                {
+                                    mode: 'immediate',
+                                    frame: { duration: 300, redraw: true },
+                                    transition: { duration: 300 }
+                                }
+                            ]
+                        })),
+                        x: 0.1,
+                        len: 0.9
+                    }]
+                };
+
+                // Render the initial bar plot
+                Plotly.newPlot('export_dollar_bar', bar_data, bar_layout).then(function () {
+                    // Convert each frame into a bar plot frame
+                    frames.forEach(frame => {
+                        console.log(frame);
+                        frame.data[0].type = 'bar'; // Set the frame data type to 'bar'
+                        frame.data[0].x = export_countries;
+                        frame.data[0].y = frame.data[0].z;
+                    });
+
+                    // Add the frames for animation
+                    Plotly.addFrames('export_dollar_bar', frames);
+
+                    // Start the animation manually (optional)
+                    console.log('Frames successfully added to the bar plot');
+                });
+            })
+            .catch(error => console.error('Error loading frames:', error));
+
     </script>
 </body>
 
