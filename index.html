@@ -370,12 +370,16 @@
         </div>
     </section>
 
-    <!-- stacked water savings -->
+    <!-- Financials of Hay Exports -->
     <section id="plots" class="py-12 bg-gray-100">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-semibold text-center mb-8">Where Our Water Goes</h2>
-            <p class="text-lg text-center mb-4">We grow hay to sell it. So where does the hay go? <a
-                    href="https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=UTAH">[3]</a>
+            <p class="text-lg text-center mb-4">We grow hay to sell it. So where does the hay go? Over the last 20 years
+                the countries that purchased our hay have changed. In the most recent few years China has been our
+                largest foreign customer purchasing $75 million on average over the last five years. Exporting goods to
+                other countries is how we grow our wealth as a nation so this can be a very good thing! However when we
+                look at these numbers in terms of our precious desert water they become a bit concerning.<a
+                    href="https://usatrade.census.gov/">[16]</a>
             </p>
             <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
                 <div class="bg-white p-6 rounded-lg shadow-lg">
@@ -387,6 +391,29 @@
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <h3 class="text-xl font-semibold mb-4">Amount of Hay (NS121490) Exported to Each Country in $</h3>
                     <div id="export_dollar_bar" class="h-96"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amount of Water Exported -->
+    <section id="plots" class="py-12 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-semibold text-center mb-8">Where Our Water Goes</h2>
+            <p class="text-lg text-center mb-4">Let's look at these foreign exports in terms of Utah water. You can
+                think about every ton of alfalfa that we ship overseas as the purchasing nation using 1.38 acre feet of
+                Utah's water. I'm going to assume that the amount of diverted water in Utah is constant each year over
+                these 20 years at 4.8 Million Acre Feet. I think this is a reasonable estimate but finding the exact
+                number per year has proved challenging. Given that indoor domestic water use is about 2% of all diverted
+                water. In every year foreign nations have used more water than individuals living in our state for their
+                immediate needs. It feels kind of crappy that places like China get more water without complaint than my
+                family, friends, and I.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Percent of Utah's Usable Water Diverted for Foreign Nations
+                    </h3>
+                    <div id="foreign_water_usage_total" class="h-96"></div>
                 </div>
             </div>
         </div>
@@ -575,12 +602,11 @@
         // Plotly.newPlot('waterSavings', data, layout);
 
 
-        // choropleth
+        // choropleth https://github.com/utahwaterfacts/utah-water-facts/blob/main/data/121490hs_sales_world_wide.json
         var export_countries = ['Australia', 'Bahrain', 'Canada', 'China', 'Hong Kong', 'India', 'Italy', 'Japan', 'Korea, South', 'Kuwait', 'Netherlands', 'Oman', 'Pakistan', 'Philippines', 'Qatar', 'Saudi Arabia', 'Singapore', 'Spain', 'Switzerland', 'Taiwan', 'Thailand', 'Trinidad and Tobago', 'United Arab Emirates', 'United Kingdom', 'Vietnam'];
-        fetch('121490hs_sales_world_wide.json') // Replace with the path to your JSON file
+        fetch('https://raw.githubusercontent.com/utahwaterfacts/utah-water-facts/main/data/121490hs_sales_world_wide.json') // Replace with the path to your JSON file
             .then(response => response.json())
             .then(frames => {
-                console.log('Loaded frames:', frames);
 
                 // Keep the absolute values for hover text and labels
                 var absoluteZ = frames[0].data[0].z; // Absolute values for display purposes
@@ -645,10 +671,9 @@
             .catch(error => console.error('Error loading frames:', error));
 
         // Create a BarPlot to show the same information
-        fetch('121490hs_sales_world_wide.json') // Replace with the path to your JSON file
+        fetch('https://raw.githubusercontent.com/utahwaterfacts/utah-water-facts/main/data/121490hs_sales_world_wide.json') // Replace with the path to your JSON file
             .then(response => response.json())
             .then(frames => {
-                console.log('Loaded frames:', frames);
                 // Define the initial bar plot data (first frame)
                 var bar_data = [
                     {
@@ -701,6 +726,18 @@
                 });
             })
             .catch(error => console.error('Error loading frames:', error));
+
+        // Plot foreign water used by year
+        var foreign_water_year = [{
+            x: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+            y: [0.38, 0.97, 1.91, 2.32, 2.51, 2.21, 3.76, 12.71, 4.05, 2.24, 7.21, 7.47, 10.07, 14.69, 16.1, 16.47, 18.36, 23.4, 19.99, 13.4, 8.7, 7.68],
+            type: 'bar',
+        }];
+        Plotly.newPlot('foreign_water_usage_total', foreign_water_year, {
+            yaxis: {
+                title: 'Percent of Utah\'s Diverted Water'  // Label for the y-axis
+            }
+        });
 
     </script>
 </body>
