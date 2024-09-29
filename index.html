@@ -118,10 +118,12 @@
                 on the reference page and links to sources are bracketed in each section. I have all of my calculations
                 in a spreadsheet <a class="text-blue-500 underline"
                     href="https://docs.google.com/spreadsheets/d/19k61Kop8Ieqk1NmJEEI18TOXT4Mq0ACOtI9yBE-biys/edit?usp=sharing">here</a>.
+                All numbers presented are good faith estimates based on the best numbers I was able to find.
                 If you see any errors or
                 discrepencies please reach out at [name of this site]@gmail.com. The nature of this information
                 naturally requires some assumptions. I've done my best to make it clear how I've done my calculations.
-                If you feel any calculation is missleading again please reach out.
+                If you feel any calculation is missleading again please reach out the goal is to improve our
+                understanding of water usage through concrete data.
             </p>
             </p>
         </div>
@@ -419,10 +421,31 @@
         </div>
     </section>
 
+    <!-- Amount of Water Exported -->
+    <section id="plots" class="py-12 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-semibold text-center mb-8">Fun Water Usage</h2>
+            <p class="text-lg text-center mb-4">Here's a plot of a few activities and how much water they use. Most of
+                these numbers are estimates based on 2023 water usage and population data. The one I think is most fun
+                is estimating how much water single citizen farmers like Governor Cox use. Based on [17] we estimate
+                that if Gov. Cox's farm is 130 acres, and each acre can be used to grow about 8 tons of alfalfa at 450k
+                gallons of water per ton then his farm alone uses about 1436 acre feet of water per year. That's the
+                same amount of water as ~60,000 utahn's showering for a year.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Acre Feet of Water used by Different Things
+                    </h3>
+                    <div id="fun_water_usage" class="h-96"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- References -->
     <section id="references" class="py-12 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-semibold text-center mb-8">Referneces</h2>
+            <h2 class="text-3xl font-semibold text-center mb-8">References</h2>
             <p>Again calculations involve assumptions and can be complicated. I've created a google sheet with the
                 calculations in the open so anyone can check the work <a class="text-blue-500 underline"
                     href="https://docs.google.com/spreadsheets/d/19k61Kop8Ieqk1NmJEEI18TOXT4Mq0ACOtI9yBE-biys/edit?usp=sharing">here</a>
@@ -478,7 +501,10 @@
                     href="https://brazos.org/About-Us/Education/Water-School/ArticleID/249#:~:text=An%20acre%2Dfoot%20is%20commonly,with%20a%20foot%20of%20water">https://brazos.org/About-Us/Education/Water-School/ArticleID/249</a>
                 <br>
                 [16] <a class="text-blue-500 underline"
-                    href="https://usatrade.census.gov/">https://usatrade.census.gov/</a> <br>
+                    href="https://usatrade.census.gov/">https://usatrade.census.gov/</a>
+                <br>
+                [17] <a class="text-blue-500 underline"
+                    href="https://kjzz.com/news/local/from-rural-utah-to-the-governors-mansion-gov-spencer-coxs-heart-is-in-fairview">https://kjzz.com/news/local/from-rural-utah-to-the-governors-mansion-gov-spencer-coxs-heart-is-in-fairview</a><br>
             </p>
         </div>
     </section>
@@ -802,6 +828,14 @@
                 title: 'Percent of Utah\'s Diverted Water'  // Label for the y-axis
             }
         });
+
+        // Fun water facts
+        var trace1 = {
+            x: ['china', 'showers', 'toilettes', 'golf courses', 'laundry cycles', 'Gov. Cox Farm'],
+            y: [465069, 80378, 30620, 33150, 12541, 1436],
+            type: 'bar'
+        };
+        Plotly.newPlot('fun_water_usage', [trace1]);
 
     </script>
 </body>
